@@ -1,4 +1,4 @@
-#include "./Straight.h"
+#include "../include/Straight.h"
 
 /// コンストラクタ引数なし
 Straight::Straight()
