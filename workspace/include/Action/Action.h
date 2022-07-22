@@ -1,5 +1,5 @@
 #pragma once
-#include "./system.h"
+#include "../system/system.h"
 
 /// 2022/07/13
 /// yoshitome

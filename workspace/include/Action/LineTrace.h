@@ -1,13 +1,12 @@
 #pragma once
 
 #include "./Action.h"
-#include "./system.h"
+#include "../system/system.h"
 #include <cmath>
 #include <iostream>
-// #include 自己位置
-// #include 台形制御
-// #include PID制御
-// #include 
+#include "../CarData/CarData.h"
+#include "./Trapezoid.h"
+#include "./PIDControl.h"
 
 #define LEFT_LINE 0
 #define RIGHT_LINE 1

@@ -1,4 +1,4 @@
-#include "../include/LineTrace.h"
+#include "../../include/Action/LineTrace.h"
 
 /// コンストラクタ引数なし
 LineTrace::LineTrace()

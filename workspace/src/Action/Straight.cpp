@@ -1,4 +1,4 @@
-#include "../include/Straight.h"
+#include "../../include/Action/Straight.h"
 
 /// コンストラクタ引数なし
 Straight::Straight()
