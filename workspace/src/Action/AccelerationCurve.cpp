@@ -129,7 +129,7 @@ float AccelCurve::calcVelocityEnd(const float j_max, const float a_max,
 	c1 = 16 * aaa + 27 * b;
 	if (c0 >= 0) {
 		/* ���[�g�̒����񕉂̂Ƃ� */
-		c2 = std::cbrt((std::sqrt(c0) + c1) / 2);
+		c2 = cbrt((std::sqrt(c0) + c1) / 2);
 		return (d > 0 ? 1 : -1) * (c2 + 4 * a * a / c2 - a) / 3;
 	}
 	else {

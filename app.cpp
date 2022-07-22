@@ -56,18 +56,24 @@ void start_task(intptr_t unused)
 /* メインタスク */
 void main_task(intptr_t unused)
 {
-	/*
+	
 	GAIN gain;
 	COORDINATE coor;
 	coor.x=10;
-	coor.y=10:
+	coor.y=10;
 	gain.p =0.5;
 	gain.i = 0.5;
 	gain.d = 0;
-	*/
-	//Action* line = new LineTrace();
 	
-   	tslp_tsk(1000 * 1000U);
-	//ETRoboc_notifyCompletedToSimulator();
+	Action* action = new LineTrace(gain,85,LEFT_LINE,coor);
+
+	action->run(50);
+
+	while(1){
+		tslp_tsk(1000 * 1000U);
+	}
+	
+   	
+	ETRoboc_notifyCompletedToSimulator();
     ext_tsk();
 }

@@ -14,7 +14,7 @@ private:
 
 	MOTOR_ANGLE motor_angle;
 	LeftMotor &leftMotor = LeftMotor::getInstance();
-	RightMotor &rightMotor = RightMotor::getInstance();;
+	RightMotor &rightMotor = RightMotor::getInstance();
 
 	Steering( const Steering &x );
 	Steering&operator=( const Steering & ) { return *this; };

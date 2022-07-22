@@ -2,8 +2,6 @@
 
 #include "./Action.h"
 #include "../system/system.h"
-#include <cmath>
-#include <iostream>
 #include "../CarData/CarData.h"
 #include "./TrapezoidControl.h"
 #include "./PIDControl.h"
@@ -29,7 +27,7 @@ class LineTrace : public Action{
 	public:
 	LineTrace();
 	LineTrace(GAIN gain,float target_val,int8_t edge,COORDINATE target_coordinate);
-	virtual ~LineTrace();
+	~LineTrace();
 
-	virtual int8_t run(int32_t speed);
+	int8_t run(int32_t speed);
 };

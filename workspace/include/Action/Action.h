@@ -10,8 +10,8 @@ class Action {
 
     public:
 		Action();
-		virtual ~Action() ;
+		~Action() ;
 
-        virtual int8_t run(int32_t speed) ;
+        virtual int8_t run(int32_t speed) =0;
 
 };

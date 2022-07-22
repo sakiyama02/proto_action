@@ -29,7 +29,7 @@ int8_t LineTrace::run(int32_t speed)
 	// 引数チェック
 	if ( speed < -100 || speed > 100 )
 	{
-		std::cout << "LineTrace PARAM err  value = " << speed << std::endl;
+		//std::cout << "LineTrace PARAM err  value = " << speed << std::endl;
 		return SYS_PARAM;
 	}
 	
@@ -39,6 +39,7 @@ int8_t LineTrace::run(int32_t speed)
 	PIDControl& 	  pid_control	= PIDControl::getInstance();
 	CarData&		  car_data		= CarData::getInstance();
 	TrapezoidControl& trapezoid 	= TrapezoidControl::getInstance();
+	Steering&		  steering		= Steering::getInstance();
 
 	HSV_DATA 	hsv_data;
 	COORDINATE 	current_coordinate;
@@ -61,7 +62,7 @@ int8_t LineTrace::run(int32_t speed)
 	distance = std::sqrt(std::pow(current_coordinate.x - target_coordinate.x,2)+
 						 std::pow(current_coordinate.y - target_coordinate.y,2));
 
-	motor_revision = trapezoid.run(distance);
+	motor_revision = speed;//trapezoid.run(distance);
 
 	if ( edge == LEFT_LINE ){
 		motor_power.right = motor_revision - pid_revision;
@@ -71,6 +72,7 @@ int8_t LineTrace::run(int32_t speed)
 		motor_power.left  = motor_revision - pid_revision;
 	}
 
+	steering.run(motor_power);
 
 	return SYS_OK;
 }

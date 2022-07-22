@@ -10,7 +10,6 @@
 #include "./AccelerationCurve.h"
 #include <algorithm>
 #include <array>
-#include <iostream> 
 
 
 class AccelDesigner {

@@ -1,14 +1,14 @@
 ///
-/// @file ‰Á‘¬“x‹ÈüƒNƒ‰ƒX
-/// @note ‰Á‘¬“x‹Èü®‚ğì¬‚·‚é
-/// @date 2022/06/29 ’JŒû‘ñŠC
+/// @file ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½Èï¿½ï¿½Nï¿½ï¿½ï¿½X
+/// @note ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½Èï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½ï¿½
+/// @date 2022/06/29 ï¿½Jï¿½ï¿½ï¿½ï¿½C
 ///
 #ifndef ACELLCURVE_HEADER
 #define ACELLCURVE_HEADER
 
 #include <cmath>
 #include <complex>
-#include <iostream>
+
 #include <ostream>
 
 
@@ -29,9 +29,9 @@ public:
 	static float calcMinDistance(const float j_max, const float a_max,
 		const float v_start, const float v_end);
 
-	// ƒRƒ“ƒXƒgƒƒ“ƒo•Ï”
+	// ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½oï¿½Ïï¿½
 	/**
-	* @brief –ô“x
+	* @brief ï¿½ï¿½ï¿½x
 	*/
 	float j(const float t)const {
 		if (t <= t0)
@@ -47,7 +47,7 @@ public:
 	}
 
 	/**
-	* @brief ‰Á‘¬“x
+	* @brief ï¿½ï¿½ï¿½ï¿½ï¿½x
 	*/
 	float a(const float t) const {
 		if (t <= t0)
@@ -63,7 +63,7 @@ public:
 	}
 
 	/**
-	* @brief ‘¬“x
+	* @brief ï¿½ï¿½ï¿½x
 	*/
 	float v(const float t) const {
 		if (t <= t0)
@@ -79,7 +79,7 @@ public:
 	}
 
 	/**
-	* @brief ˆÊ’u
+	* @brief ï¿½Ê’u
 	*/
 	float x(const float t) const {
 		if (t <= t0)
@@ -95,19 +95,19 @@ public:
 	}
 
 	/**
-	* @brief I“_ [s]
+	* @brief ï¿½Iï¿½_ï¿½ï¿½ï¿½ï¿½ [s]
 	*/
 	float t_end() const { return t3; }
 	/**
-	 * @brief I“_‘¬“x [m/s]
+	 * @brief ï¿½Iï¿½_ï¿½ï¿½ï¿½x [m/s]
 	 */
 	float v_end() const { return v3; }
 	/**
-	 * @brief I“_ˆÊ’u [m]
+	 * @brief ï¿½Iï¿½_ï¿½Ê’u [m]
 	 */
 	float x_end() const { return x3; }
 	/**
-	 * @brief ‹«ŠE‚Ì
+	 * @brief ï¿½ï¿½ï¿½Eï¿½Ìï¿½ï¿½ï¿½
 	 */
 	float t_0() const { return t0; }
 	float t_1() const { return t1; }
@@ -118,11 +118,11 @@ private:
 
 
 protected:
-	float jm;									/* –ô“x’è” [m/s/s/s]		 */
-	float am;									/* ‰Á‘¬“x’è” [m/s/s]		 */
-	float t0, t1, t2, t3;						/* ’è” [s]				 */
-	float v0, v1, v2, v3;						/* ‘¬“x’è” [m/s]			 */
-	float x0, x1, x2, x3;						/* ˆÊ’u’è” [m]				 */
+	float jm;									/* ï¿½ï¿½ï¿½xï¿½è” [m/s/s/s]		 */
+	float am;									/* ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½è” [m/s/s]		 */
+	float t0, t1, t2, t3;						/* ï¿½ï¿½ï¿½ï¿½ï¿½è” [s]				 */
+	float v0, v1, v2, v3;						/* ï¿½ï¿½ï¿½xï¿½è” [m/s]			 */
+	float x0, x1, x2, x3;						/* ï¿½Ê’uï¿½è” [m]				 */
 };
 
 #endif

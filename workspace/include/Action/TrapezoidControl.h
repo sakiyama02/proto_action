@@ -11,7 +11,6 @@
 
 #include "../system/system.h"
 #include "AccelerationDesigner.h"
-#include <iostream>
 #include <ostream>
 #include <cstdio>
 #include <fstream>

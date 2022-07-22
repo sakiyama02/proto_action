@@ -18,9 +18,9 @@ APPL_CXXOBJS += \
 				Motor.o\
 				RightMotor.o\
 				Steering.o\
-				TrapezoidControl.o\
 				AccelerationCurve.o\
 				AccelerationDesigner.o\
+				TrapezoidControl.o\
 #
 SRCLANG := c++
 
@@ -28,7 +28,7 @@ ifdef CONFIG_EV3RT_APPLICATION
 
 # Include libraries
 
-include $(EV3RT_SDK_LIB_DIR)/libcpp-ev3/Makefile
+
 #include $(mkfile_path)/workspace/library/RyujiEv3/Makefile
 
 endif 
