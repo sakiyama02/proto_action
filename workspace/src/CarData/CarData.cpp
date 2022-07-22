@@ -11,7 +11,7 @@
 /* -------------------------------------------------------------------------	*/
 CarData::CarData( )
 {
-	angle = 0.0f;
+	car_angle = 0.0f;
 
 	position.x = 0 * 0.3527 * 2;
 	position.y = 0 * 0.3527 * 2;
@@ -68,10 +68,10 @@ int8 CarData::update( void )
 		return retChk;
 	}
 	
-	if ( angle >= 600 || angle <= -600 ) {
+	if ( car_angle >= 600 || car_angle <= -600 ) {
 		//msg.LOG( LOG_ID_ERR, "�ԑ̊p�x���ُ�̂��ߋ����I��\n" );
 		
-		act_tsk( END_TASK );
+		//act_tsk( END_TASK );
 		return SYS_NG;
 	}
 	return SYS_OK;
@@ -97,9 +97,9 @@ int8 CarData::calcOdometry( WheelDist* wheel_dist )
 	double dist = 0.0f;
 	double rad = 0.0f;
 	double addRad = 0.0f;
-	CORDINATE addPos;
+	COORDINATE addPos;
 
-	memset( &addPos, 0, sizeof( CORDINATE ) );
+	memset( &addPos, 0, sizeof( COORDINATE ) );
 
 	/* ���W�v�Z */
 	dist = (double)(wheel_dist->right + wheel_dist->left) / 2.0;
@@ -118,7 +118,7 @@ int8 CarData::calcOdometry( WheelDist* wheel_dist )
 	position.y += addPos.y;
 
 	/* �p�x�X�V */
-	angle += angle;
+	car_angle += angle;
 
 	return SYS_OK;
 }
@@ -132,7 +132,7 @@ int8 CarData::calcOdometry( WheelDist* wheel_dist )
 /* �쐬��		�F 2021/07/23		 ��R�@�E�l		 �V�K�쐬					*/
 /* �쐬��		�F 2022/07/16		 �R�c�@���V��	 �V�K�쐬					*/
 /* -------------------------------------------------------------------------	*/
-CORDINATE CarData::getPos( void )
+COORDINATE CarData::getPos( void )
 {
 	return position;
 }
@@ -145,7 +145,7 @@ CORDINATE CarData::getPos( void )
 /* �쐬��		�F 2021/07/23		 ��R�@�E�l		 �V�K�쐬					*/
 /* �쐬��		�F 2022/07/16		 �R�c�@���V��	:�V�K�쐬					*/
 /* -------------------------------------------------------------------------	*/
-int8 CarData::setPos( CORDINATE coordinate )
+int8 CarData::setPos( COORDINATE coordinate )
 {
 	//frLog &msg = frLog::GetInstance();
 	position = coordinate;
@@ -163,7 +163,7 @@ int8 CarData::setPos( CORDINATE coordinate )
 /* -------------------------------------------------------------------------	*/
 float CarData::getAngle( void )
 {
-	return angle;
+	return car_angle;
 }
 /* -------------------------------------------------------------------------	*/
 /* �֐���		�F setAngle							    	    				*/

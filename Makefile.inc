@@ -6,16 +6,10 @@ APPL_COBJS += \
 
 APPL_CXXOBJS += \
 				system.o\
-				Motor.o\
-				LeftMotor.o\
-				RightMotor.o\
 				LineTrace.o\
 				Action.o\
 				Controller.o\
 				PIDControl.o\
-				Trapezoid.o\
-				AccelerationCurve.o\
-				AccelerationDesigner.o\
 				ColorSensor.o\
 				ColorSpace.o\
 				HSV.o\
@@ -24,6 +18,9 @@ APPL_CXXOBJS += \
 				Motor.o\
 				RightMotor.o\
 				Steering.o\
+				TrapezoidControl.o\
+				AccelerationCurve.o\
+				AccelerationDesigner.o\
 #
 SRCLANG := c++
 
@@ -46,15 +43,13 @@ APPL_DIRS +=\
 	$(mkfile_path)workspace/src/CarData\
 
 INCLUDES +=\
-	$(mkfile_path)workspace/include/Action\
-	$(mkfile_path)workspace/include/ColorSpace\
-	$(mkfile_path)workspace/include/Steering\
-	$(mkfile_path)workspace/include/system\
-	$(mkfile_path)workspace/include/CarData\
+	-I$(mkfile_path)workspace/include/Action\
+	-I$(mkfile_path)workspace/include/ColorSpace\
+	-I$(mkfile_path)workspace/include/Steering\
+	-I$(mkfile_path)workspace/include/system\
+	-I$(mkfile_path)workspace/include/CarData\
 
 COPTS += -I$(ETROBO_HRP3_WORKSPACE)/etroboc_common
 COPTS += -DMAKE_EV3
-COPTS += -DMAKE_EV3
 COPTS += -std=gnu++11
 COPTS += -fno-threadsafe-statics
-COPTS += -DMAKE_EV3

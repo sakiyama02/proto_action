@@ -9,9 +9,9 @@ class Action {
     private:
 
     public:
-        Action();
-        virtual ~Action();
+		Action();
+		virtual ~Action() ;
 
-        virtual int8_t run(int32_t speed) = 0;
+        virtual int8_t run(int32_t speed) ;
 
 };

@@ -5,8 +5,9 @@
 #include <cmath>
 #include <iostream>
 #include "../CarData/CarData.h"
-#include "./Trapezoid.h"
+#include "./TrapezoidControl.h"
 #include "./PIDControl.h"
+#include "../ColorSpace/ColorSpace.h"
 
 #define LEFT_LINE 0
 #define RIGHT_LINE 1
@@ -28,7 +29,7 @@ class LineTrace : public Action{
 	public:
 	LineTrace();
 	LineTrace(GAIN gain,float target_val,int8_t edge,COORDINATE target_coordinate);
-	~LineTrace();
+	virtual ~LineTrace();
 
 	virtual int8_t run(int32_t speed);
 };

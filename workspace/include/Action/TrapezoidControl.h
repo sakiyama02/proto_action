@@ -4,11 +4,13 @@
 /// @date 2022/06/29 �J����C
 ///
 
-#include "AccelerationDesigner.h"
+
 
 #ifndef TARPEZOID_HEADER
 #define TARPEZOID_HEADER
 
+#include "../system/system.h"
+#include "AccelerationDesigner.h"
 #include <iostream>
 #include <ostream>
 #include <cstdio>
@@ -43,18 +45,21 @@ using namespace std;
 
 
 
-class Trapezoid {
+class TrapezoidControl {
 public:
-	Trapezoid();
-	~Trapezoid();
+	TrapezoidControl();
+	~TrapezoidControl();
+
+	TrapezoidControl( const TrapezoidControl &x );
+	TrapezoidControl&operator=( const TrapezoidControl & ) { return *this; };
 
 	float run(float input);
 	int8_t setVelocity(float velocity);
 
-	static Trapezoid& getInstance()
+	static TrapezoidControl &getInstance()
 	{
-		static Trapezoid Trapezoid_;	// �C���X�^���X�̐���
-		return Trapezoid_;
+		static TrapezoidControl TrapezoidControl_;	// �C���X�^���X�̐���
+		return TrapezoidControl_;
 	}
 
 private:

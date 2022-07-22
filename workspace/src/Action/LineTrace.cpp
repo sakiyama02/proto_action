@@ -19,6 +19,11 @@ LineTrace::LineTrace(GAIN _gain,float _target_val,int8_t _edge,COORDINATE _coord
 	
 }
 
+LineTrace::~LineTrace()
+{
+
+}
+
 int8_t LineTrace::run(int32_t speed)
 {
 	// 引数チェック
@@ -31,7 +36,7 @@ int8_t LineTrace::run(int32_t speed)
 
 	// 変数宣言
 	ColorSpace&		  color_space	= ColorSpace::getInstance();
-	PIDControl& 	  pid_control	= PIDControl::getInstance(gain,target_val);
+	PIDControl& 	  pid_control	= PIDControl::getInstance();
 	CarData&		  car_data		= CarData::getInstance();
 	TrapezoidControl& trapezoid 	= TrapezoidControl::getInstance();
 
@@ -47,6 +52,7 @@ int8_t LineTrace::run(int32_t speed)
 	// 色空間からhsv値を取得してから、閾値と取得した値との差分をpid制御へ渡し、操作量を取得する
 	hsv_data 		= color_space.getHSV();
 	deviation		= target_val - hsv_data.v;
+	pid_control.init(gain);
 	pid_revision 	= pid_control.run(deviation);
 
 	// 目標座標までの距離を算出し台形制御に現在速度を取得する

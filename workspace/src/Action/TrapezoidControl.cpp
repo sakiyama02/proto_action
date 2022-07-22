@@ -3,12 +3,12 @@
 /// @note 台形制御による速度制御を行うクラス
 /// @date 2022/06/29 谷口拓海
 ///
-#include "../../include/Action/Trapezoid.h"
+#include "../../include/Action/TrapezoidControl.h"
 
 /**
 	* @brief コンストラクタ
 */
-Trapezoid::Trapezoid(){
+TrapezoidControl::TrapezoidControl(){
 	run_time = 0;
 	start = 0;
 	target = 0;
@@ -20,7 +20,7 @@ Trapezoid::Trapezoid(){
 /**
 	* @brief デストラクタ
 */
-Trapezoid::~Trapezoid() {
+TrapezoidControl::~TrapezoidControl() {
 }
 
 /**
@@ -28,9 +28,9 @@ Trapezoid::~Trapezoid() {
 	* @param deviation		偏差
 	* @return 	motor_revision	モーターパワー
 */
-float Trapezoid::run(float deviation)
+float TrapezoidControl::run(float deviation)
 {
-	SINT ret = 0;								/* 戻り値チェック変数		 */
+	int8_t ret = 0.0f;								/* 戻り値チェック変数		 */
 
 	/* 走行距離が変化した時に真 */
 	if (pre_deviation < deviation) {
@@ -61,7 +61,7 @@ float Trapezoid::run(float deviation)
 	* @return SYS_OK	正常終了
 	*		  SYS_NG	引数エラー
 */
-int8_t Trapezoid::setVelocity(float velocity)
+int8_t TrapezoidControl::setVelocity(float velocity)
 {
 	/* 引数チェック */
 	if (velocity < VELOCITY_MIN || velocity > VELOCITY_MAX) {
@@ -80,7 +80,7 @@ int8_t Trapezoid::setVelocity(float velocity)
 	* @return SYS_OK	正常終了
 	*		  SYS_NG	異常終了
 */
-int8_t Trapezoid::calc(void)
+int8_t TrapezoidControl::calc(void)
 {
 	float v_target = 0;							/* 目標速度					 */
 	float v_start = 0;							/* 初速度					 */
@@ -123,7 +123,7 @@ int8_t Trapezoid::calc(void)
 	* @param velocity:float　目標速度
 	* @return 	正常終了
 */
-float Trapezoid::conversion() {
+float TrapezoidControl::conversion() {
 	float ret_conv = 0.0f;						/* 変換後戻り値				 */
 
 	ret_conv = (float)((motor_revision * VELOCITY_MAX) / V_MAX_WHEEL);

@@ -10,10 +10,7 @@
 #include "ev3api.h"
 #include "app.h"
 #include "etroboc_ext.h"
-#include "workspace/include/system.h"
-
-
-#include "workspace/include/Action/LineTrace.h"
+#include "./workspace/include/Action/LineTrace.h"
 
 #if defined(BUILD_MODULE)
 #include "module_cfg.h"
@@ -59,9 +56,18 @@ void start_task(intptr_t unused)
 /* メインタスク */
 void main_task(intptr_t unused)
 {
-
+	/*
+	GAIN gain;
+	COORDINATE coor;
+	coor.x=10;
+	coor.y=10:
+	gain.p =0.5;
+	gain.i = 0.5;
+	gain.d = 0;
+	*/
+	//Action* line = new LineTrace();
 	
    	tslp_tsk(1000 * 1000U);
-	ETRoboc_notifyCompletedToSimulator();
+	//ETRoboc_notifyCompletedToSimulator();
     ext_tsk();
 }

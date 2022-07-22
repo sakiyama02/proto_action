@@ -3,11 +3,11 @@
 /// @note �S�����������������x�Ȑ������쐬����
 /// @date 2022/06/29 �J����C
 ///
-#include "./AccelerationCurve.h"
+
 
 #ifndef ACELLDESIGNER_HEADER
 #define ACELLDESIGNER_HEADER
-
+#include "./AccelerationCurve.h"
 #include <algorithm>
 #include <array>
 #include <iostream> 

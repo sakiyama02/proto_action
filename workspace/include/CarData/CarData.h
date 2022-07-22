@@ -5,8 +5,8 @@
 #include <math.h>
 #include <cmath>
 
-#define PI 3.141592653589793
-#define DIST (((PI) * (double)CAR_WHEEL_WIDTH) / 360.0f)
+#define PI (3.141592653589793f)
+#define DIST (((PI) * CAR_WHEEL_WIDTH) / 360.0f)
 
 typedef struct WheelDist_s
 {
@@ -17,7 +17,7 @@ typedef struct WheelDist_s
 class CarData
 {
 private:
-	CORDINATE position;
+	COORDINATE position;
 	float car_angle;
 
 	CarData( );
@@ -35,9 +35,9 @@ public:
 
 	int8 update( );
 
-	CORDINATE getPos( void );
+	COORDINATE getPos( void );
 
-	int8 setPos( CORDINATE coordinate );
+	int8 setPos( COORDINATE coordinate );
 
 	float getAngle( void );
 

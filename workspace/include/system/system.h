@@ -1,4 +1,5 @@
 #pragma once
+
 #include <cstdint>
 #include <string.h>
 #include <memory>
@@ -11,8 +12,8 @@
 #define SYS_NG 1    //異常終了
 #define SYS_PARAM 2 //引数エラー
 
-#define CAR_WIDTH       //車体の幅(mm)
-#define CAR_WHEEL_WIDTH  //車輪の直径(mm)
+#define CAR_WIDTH        10//車体の幅(mm)
+#define CAR_WHEEL_WIDTH  10//車輪の直径(mm)
 
 // integer 8bit
 using int8 = int8_t;
@@ -73,6 +74,11 @@ typedef struct MOTOR_POWER_TAG {
 	int32_t right;
 	int32_t left;
 }MOTOR_POWER;
+
+typedef struct MOTOR_ANGLE_TAG {
+	int32_t right;
+	int32_t left;
+}MOTOR_ANGLE;
 
 typedef struct COORDINATE_TAG {
 	float x;
