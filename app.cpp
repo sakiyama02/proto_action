@@ -70,7 +70,8 @@ void main_task(intptr_t unused)
 	action->run(50);
 
 	while(1){
-		tslp_tsk(1000 * 1000U);
+        action->run(50);
+		tslp_tsk(10 * 1000U);
 	}
 	
    	

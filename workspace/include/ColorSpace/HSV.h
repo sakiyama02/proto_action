@@ -1,23 +1,14 @@
 #pragma once
-#include <cstdint>
-#include <string.h>
-#include <memory>
-#include <string>
-#include "ev3api.h"
-#include "../system/system.h"
+#ifndef _HSV_H_
+#define _HSV_H_
 
 class HSV
 {
-private:
-    uint16 hConvert(RGB_DATA);
-
-    uint16 sConvert(RGB_DATA);
-
-    uint16 vConvert(RGB_DATA);
 public:
+	int8_t Init();
+    HSV_DATA  convert(RGB_DATA rgb);
     HSV();
 
-    ~HSV();
-
-    HSV_DATA convert(RGB_DATA);
-};
+	~HSV();
+}; 
+#endif

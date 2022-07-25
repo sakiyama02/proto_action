@@ -1,114 +1,107 @@
-#include "../../include/ColorSpace/HSV.h"
-#include <algorithm>
-#include <vector>
-using namespace std;
-HSV::HSV(){}
 
+
+/* -------------------------------------------------------------------------- */
+/* includeファイル                                                            */
+/* -------------------------------------------------------------------------- */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <cstdint>
+#include <string.h>
+#include <memory>
+#include "ev3api.h"
+#include "../../include/system/system.h"
+#include "../../include/ColorSpace/ColorSpace.h"
+#include "../../include/ColorSpace/HSV.h"
+
+
+HSV::HSV(){}
 HSV::~HSV(){}
 
-HSV_DATA HSV::convert(RGB_DATA _rgbData){
-    HSV_DATA hsvTmp;
-
-    hsvTmp.h=hConvert(_rgbData);
-    hsvTmp.s=sConvert(_rgbData);
-    hsvTmp.v=vConvert(_rgbData);
-    
-    return hsvTmp;
-}
-
-
-uint16 HSV::hConvert(RGB_DATA _rgbData){
-    uint16 hdata=0;
-    double htmp=0.0f;
-    vector<int> vec;
-    vector<int>::iterator itr;
-    vec.push_back(_rgbData.r);
-    vec.push_back(_rgbData.g);
-    vec.push_back(_rgbData.b);
-    
-    auto minmax= minmax_element(vec.begin(), vec.end());
-    size_t n_count = count(vec.begin(), vec.end(),*minmax.second);
-    if(n_count==3){
-        hdata=0;
-        return hdata;
+HSV_DATA HSV::convert(RGB_DATA rgb){
+    int16_t red = 0;
+    int16_t green = 0;
+    int16_t bule = 0;
+    red=rgb.r;
+    green=rgb.g;
+    bule =rgb.b;
+    double h=0.0f;
+    double s=0.0f;
+    double v=0.0f;
+    HSV_DATA hsv_Data;
+    //赤が最大の時
+    if((red>green)&&(red>bule)){
+        if(green>=bule){
+            h=(double)(60*((double)(green-bule)/(double)(red-bule)));
+            s=(double)((double)(red-bule)/red)*255;
+        }else{
+            h=(double)(60*((double)(green-bule)/(double)(red-green)));
+            s=(double)((double)(red-green)/red)*255;
+            printf("%lf\n",h);
+        }    
+        hsv_Data.v=red;
+    }
+    //青が最小の時
+    if((red==green)&&(red>bule)){
+        if(green>=bule){
+            h=(double)(60*((double)(green-bule)/(double)(red-bule)));
+            s=(double)((double)(red-bule)/red)*255;
+        }
+        hsv_Data.v=red;
     }
     
-    itr = std::find(vec.begin(), vec.end(),*minmax.second);
-    const int wanted_index = std::distance(vec.begin(), itr);
-    //r
-    if(wanted_index==0){
-        ++itr;
-        htmp=(double)(60*((double)(*itr-*(++itr)))/(double)(*minmax.second-*minmax.first));
+    //青が最大の時
+    if((bule>green)&&(bule>red)){
+        if(green>=red){
+            h=(double)(60*((double)(red-green)/(double)(bule-red)))+240;
+            s=(double)((double)(bule-red)/bule)*255; 
+        }else{
+            h=(double)(60*((double)(red-green)/(double)(bule-green)))+240;
+            s=(double)((double)(bule-green)/bule)*255; 
+        }
+        hsv_Data.v=bule;
     }
-    //g
-    else if(wanted_index==1){
-        ++itr;
-        htmp=(double)(60*((double)(*itr-*vec.begin())/(double)(*minmax.second-*minmax.first)))+120;
+    
+    //赤が最小の時
+    if((bule==green)&&(bule>red)){
+         if(green>=red){
+            h=(double)(60*((double)(red-green)/(double)(bule-red)))+240;
+            s=(double)((double)(bule-green)/bule)*255; 
+        }
+         hsv_Data.v=bule;
     }
-    //b
-    else{
-        --itr;
-        htmp=(double)(60*((double)(*vec.begin()-*itr)/(double)(*minmax.second-*minmax.first)))+240;
+    
+    //緑が最大の時
+    if((green>red)&&(green>bule)){
+        if(red>=bule){
+            h=(double)(60*((double)(red-green)/(double)(green-bule)))+120;
+            s=(double)((double)(green-bule)/green)*255; 
+        }else{
+            h=(double)(60*((double)(red-green)/(double)(green-red)))+120;
+            s=(double)((double)(green-red)/green)*255;
+        } 
+        hsv_Data.v=green;
     }
-    if(htmp<0){
-        htmp+=360;
+    
+    //緑が最小の時
+    if((bule==red)&&(bule>green)){
+        if(red>=green){
+            h=(double)(60*((double)(red-green)/(double)(bule-green)))+240;
+            s=(double)((double)(bule-green)/bule)*255; 
+        }
+         hsv_Data.v=green;
     }
-    hdata=round(htmp);
-    printf("%d\n",hdata);
-    return hdata;
-}
-
-uint16 HSV::sConvert(RGB_DATA _rgbData){
-    uint16 sdata=0;
-    float max_data = 0;
-    float min_data = 0;
-
-    //RGBの最大値を取得
-    if(_rgbData.r >= _rgbData.g && _rgbData.r >= _rgbData.b)
-    {
-        max_data = _rgbData.r;
+    hsv_Data.h=h;
+    hsv_Data.s=s;
+    //最大と最小の時
+    if((red==green)&&(green==bule)){
+        hsv_Data.h=0;
+        hsv_Data.s=0;
+        hsv_Data.v=red;
     }
-    else if(_rgbData.g >= _rgbData.r && _rgbData.g >= _rgbData.b)
-    {
-        max_data = _rgbData.g;
+    //Hの値がマイナスの時
+    if(hsv_Data.h<0){
+        hsv_Data.h=hsv_Data.h+360;
     }
-    else if(_rgbData.b >= _rgbData.r && _rgbData.b >= _rgbData.g)
-    {
-        max_data = _rgbData.b;
-    }
-
-    //RGBの最小値を取得
-    if(_rgbData.r <= _rgbData.g && _rgbData.r <= _rgbData.b)
-    {
-        min_data = _rgbData.r;
-    }
-    else if(_rgbData.g <= _rgbData.r && _rgbData.g <=_rgbData.b)
-    {
-        min_data = _rgbData.g;
-    }
-    else if(_rgbData.b <= _rgbData.r && _rgbData.b <= _rgbData.g)
-    {
-        min_data = _rgbData.b;
-    }
-
-    sdata = ((max_data -min_data) / max_data) * 255 ;
-    return sdata;
-}
-
-uint16 HSV::vConvert(RGB_DATA _rgbData){
-    uint vdata=0;
-    //hsvのv値を格納
-    if(_rgbData.r >= _rgbData.g && _rgbData.r >= _rgbData.b)
-    {
-        vdata= _rgbData.r;
-    }
-    else if(_rgbData.g >= _rgbData.r && _rgbData.g >= _rgbData.b)
-    {
-        vdata= _rgbData.g;
-    }
-    else if(_rgbData.b >= _rgbData.r && _rgbData.b >= _rgbData.g)
-    {
-        vdata= _rgbData.b;
-    }
-    return vdata;
+    return  hsv_Data;
 }
