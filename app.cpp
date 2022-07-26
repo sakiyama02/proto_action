@@ -11,6 +11,7 @@
 #include "app.h"
 #include "etroboc_ext.h"
 #include "./workspace/include/Action/LineTrace.h"
+#include "./workspace/include/Action/Curve.h"
 
 #if defined(BUILD_MODULE)
 #include "module_cfg.h"
@@ -57,10 +58,12 @@ void start_task(intptr_t unused)
 void main_task(intptr_t unused)
 {
 	
-	GAIN gain;
+	
 	COORDINATE coor;
 	coor.x=10;
 	coor.y=10;
+	/*
+	GAIN gain;
 	gain.p =0.5;
 	gain.i = 0.5;
 	gain.d = 0;
@@ -68,9 +71,11 @@ void main_task(intptr_t unused)
 	Action* action = new LineTrace(gain,85,LEFT_LINE,coor);
 
 	action->run(50);
+	*/
 
+	//Action* action = new Curve(200,LEFT_CURVE,coor);
 	while(1){
-        action->run(50);
+        action->run(30);
 		tslp_tsk(10 * 1000U);
 	}
 	

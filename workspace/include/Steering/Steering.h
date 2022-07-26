@@ -3,8 +3,7 @@
 #include"LeftMotor.h"
 #include"RightMotor.h"
 
-#define CAR_WIDTH (134.22f)
-#define CAR_WHEEL_WIDTH (90.33f)
+
 
 class Steering
 {

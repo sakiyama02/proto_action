@@ -12,8 +12,8 @@
 #define SYS_NG 1    //異常終了
 #define SYS_PARAM 2 //引数エラー
 
-#define CAR_WIDTH        10//車体の幅(mm)
-#define CAR_WHEEL_WIDTH  10//車輪の直径(mm)
+#define CAR_WIDTH (134.22f)
+#define CAR_WHEEL_WIDTH (90.33f)
 
 // integer 8bit
 using int8 = int8_t;
