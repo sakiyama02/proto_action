@@ -1,9 +1,11 @@
 #pragma once
 
 #include "./Action.h"
-#include "./system.h"
-#include <cmath>
-#include <iostream>
+#include "../system/system.h"
+#include "./TrapezoidControl.h"
+#include "../Steering/Steering.h"
+#include "../CarData/CarData.h"
+
 // #include 自己位置
 // #include 台形制御
 // #include 
@@ -21,5 +23,5 @@ class Straight : public Action{
 	Straight(COORDINATE target_coordinate);
 	~Straight();
 
-	virtual int8_t run(int32_t speed);
+	int8_t run(int32_t speed);
 };

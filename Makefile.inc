@@ -22,6 +22,7 @@ APPL_CXXOBJS += \
 				AccelerationDesigner.o\
 				TrapezoidControl.o\
 				Curve.o\
+				Straight.o\
 #
 SRCLANG := c++
 

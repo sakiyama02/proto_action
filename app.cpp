@@ -12,6 +12,8 @@
 #include "etroboc_ext.h"
 #include "./workspace/include/Action/LineTrace.h"
 #include "./workspace/include/Action/Curve.h"
+#include "./workspace/include/Action/Straight.h"
+#include "./workspace/include/CarData/CarData.h"
 
 #if defined(BUILD_MODULE)
 #include "module_cfg.h"
@@ -57,9 +59,10 @@ void start_task(intptr_t unused)
 /* メインタスク */
 void main_task(intptr_t unused)
 {
-	
+	CarData&            car_data    = CarData::getInstance();
 	
 	COORDINATE coor;
+	COORDINATE now_coor;
 	coor.x=10;
 	coor.y=10;
 	/*
@@ -74,8 +77,16 @@ void main_task(intptr_t unused)
 	*/
 
 	//Action* action = new Curve(200,LEFT_CURVE,coor);
+	
+
+
+	Action* action = new Straight(coor);
 	while(1){
+		car_data.update();
         action->run(30);
+		now_coor = car_data.getPos();
+		if (cnt =)
+		printf("x=%f,y=%f\n",now_coor.x,now_coor.y);
 		tslp_tsk(10 * 1000U);
 	}
 	
