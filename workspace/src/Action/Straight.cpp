@@ -39,6 +39,7 @@ int8_t Straight::run(int32_t speed)
 						 std::pow(current_coordinate.y - target_coordinate.y,2));
 
 	motor_revision =speed;// trapezoid.run(distance);
+	motor_revision = trapezoid.run(distance);
 
 	motor_power.left = motor_power.right = motor_revision;
 

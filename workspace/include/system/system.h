@@ -13,7 +13,8 @@
 #define SYS_PARAM 2 //引数エラー
 
 #define CAR_WIDTH (134.22f)
-#define CAR_WHEEL_WIDTH (90.33f)
+//#define CAR_WHEEL_WIDTH (90.33f)
+#define CAR_WHEEL_WIDTH (100.00f)
 
 // integer 8bit
 using int8 = int8_t;

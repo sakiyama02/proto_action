@@ -63,8 +63,8 @@ void main_task(intptr_t unused)
 	
 	COORDINATE coor;
 	COORDINATE now_coor;
-	coor.x=10;
-	coor.y=10;
+	coor.x=0;
+	coor.y=1570;
 	/*
 	GAIN gain;
 	gain.p =0.5;
@@ -83,10 +83,13 @@ void main_task(intptr_t unused)
 	Action* action = new Straight(coor);
 	while(1){
 		car_data.update();
-        action->run(30);
+        action->run(0);
 		now_coor = car_data.getPos();
-		if (cnt =)
 		printf("x=%f,y=%f\n",now_coor.x,now_coor.y);
+		if (now_coor.y > ((93 * 0.3527 * 2) + 1570)){
+			printf("x=%f,y=%f\n",now_coor.x,now_coor.y);
+			break;
+		}
 		tslp_tsk(10 * 1000U);
 	}
 	

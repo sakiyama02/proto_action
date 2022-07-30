@@ -11,10 +11,10 @@
 /* -------------------------------------------------------------------------	*/
 CarData::CarData( )
 {
-	car_angle = 90.0f;
+	car_angle = 0.0f;
 
-	position.x = 0 * 0.3527 * 2;
-	position.y = 0 * 0.3527 * 2;
+	position.x = 3552 * 0.3527 * 2;
+	position.y = 93 * 0.3527 * 2;
 }
 
 CarData::~CarData( ) {}
@@ -102,12 +102,12 @@ int8 CarData::calcOdometry( WheelDist* wheel_dist )
 	memset( &addPos, 0, sizeof( COORDINATE ) );
 
 	/* ���W�v�Z */
-	dist = (double)(wheel_dist->right + wheel_dist->left) / 2.0;
-	angle = (360.0f / (2.0f * PI * CAR_WIDTH)) * (wheel_dist->left - wheel_dist->right);
+	dist = (double)(wheel_dist->right + wheel_dist->left) / 2.0f;
+	angle = (float)(360.0f / (2.0f * PI * CAR_WIDTH)) * (wheel_dist->left - wheel_dist->right);
 
 	/* �p�x�����W�A���ϊ� */
 	addRad = ((double)(angle)) * (PI / 180.0f);
-	rad = ((double)(angle)) * (PI / 180.0f);
+	rad = ((double)(car_angle)) * (PI / 180.0f);
 
 	/* /2.0f���邩�킩��Ȃ� */
 	addPos.x = (float)-(dist * std::sin( rad + addRad / 2.0f ));
