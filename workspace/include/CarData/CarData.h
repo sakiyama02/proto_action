@@ -39,6 +39,10 @@ public:
 
 	int8 setPos( COORDINATE coordinate );
 
+	int8 setPosX( float pos_x );
+
+	int8 setPosY( float pos_y );
+
 	float getAngle( void );
 
 	int8 setAngle( float angle );
