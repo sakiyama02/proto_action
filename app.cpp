@@ -63,21 +63,22 @@ void main_task(intptr_t unused)
 	
 	COORDINATE coor;
 	COORDINATE now_coor;
-	coor.x=0;
-	coor.y=1570;
+	coor.x=3849 * 0.3527 * 2;
+	coor.y=210 * 0.3527 * 2;
 	
+	/*
 	GAIN gain;
 	gain.p =0.5;
 	gain.i = 0.5;
 	gain.d = 0;
 	
 	Action* action = new LineTrace(gain,85,RIGHT_LINE,coor);
-	
+	*/
 
 	//action->run(50);
 	
 
-	//Action* action = new Curve(200,LEFT_CURVE,coor);
+	Action* action = new Curve(200,LEFT_CURVE,coor);
 	
 	//Action* action = new Straight(coor);
 	
@@ -88,7 +89,7 @@ void main_task(intptr_t unused)
 		//printf("x=%f,y=%f\n",now_coor.x,now_coor.y);
 		if (now_coor.y > ((93 * 0.3527 * 2) + 1570)){
 			//printf("x=%f,y=%f\n",now_coor.x,now_coor.y);
-			break;
+			//break;
 		}
 		tslp_tsk(10 * 1000U);
 	}

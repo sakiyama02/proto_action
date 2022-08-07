@@ -33,32 +33,52 @@ int8_t Curve::run(int32_t speed){
 	COORDINATE      current_coordinate;     // 自己位置
     MOTOR_POWER     motor_power;            // モーターパワー
 	float           target_distance;        // 目標直線距離
+    float           area;                   // 面積
+	float           average;                // 平均
+	float           height;                 // 高さ
 
     // 変数初期化
     target_distance     = 0.0f;
     circle              = 0.0f;
     ratio_left          = 0.0f;
     ratio_right         = 0.0f;
-    //current_coordinate  = car_data.getPos();
+    area                = 0.0f;
+    average             = 0.0f;
+    height              = 0.0f;
+    current_coordinate  = car_data.getPos();
 
     /// 走行距離計算
     // 自己位置、目標座標感の距離計算
     // 直線距離 = √ (x2-x)(x2-x) + (y2-y)(y2-y)
-    //target_distance = std::sqrt( std::pow(target_coordinate.x - current_coordinate.x, 2) + std::pow(target_coordinate.y - current_coordinate.y, 2) );
+    target_distance = std::sqrt( std::pow(target_coordinate.x - current_coordinate.x, 2) + std::pow(target_coordinate.y - current_coordinate.y, 2) );
+    if (target_distance > (radius * 2.0f)) {
+		radius = target_distance / 2.0f;
+	}
     // 半径 半径 目標座標までの距離　から角度計算
     //        b*b + c*c - a*a
     // cosA = ----------------
     //              2bc
-    //angle = std::cos(( std::pow(radius, 4) - std::pow(target_distance, 2) ) / (std::pow(radius,2) * 2));
+    average = (radius + radius + target_distance) / 2.0f;
+	area = std::sqrt(average * (average - radius) * (average - radius) * (average - target_distance));
+
+	if (target_distance >= radius) {
+		height = (2.0f * area) / target_distance;
+		angle = 180.0f - (std::asin(height / radius) / PI * 180.0f) - (std::asin(height / radius ) / PI * 180.0f);
+	}
+	else {
+		height = 2.0f * (area / radius);
+		angle = std::asin(height / radius) / PI * 180.0f;
+	}
+
     // 角度と辺の長さから扇形の円周を求める
     // 円周　＝　2πr * (角度 / 360)
-    //circle = 2 * PAI * radius * (angle / 360);
+    circle = (2 * PI * radius * angle) / 360;
 
+    //printf("%f\n",angle);
 
     /// 加減速どうこう
 	trapezoid.setVelocity(speed);
-	motor_revision = speed;
-	trapezoid.run(target_distance);
+	motor_revision = trapezoid.run(circle);
 
     /// 比率計算
     // 左カーブの比率
@@ -73,8 +93,8 @@ int8_t Curve::run(int32_t speed){
         ratio_right = (radius - (CAR_WIDTH / 2)) / (radius + (CAR_WIDTH / 2));
     }
     // カーブの比率計算
-    motor_power.left = speed * ratio_left;
-    motor_power.right = speed * ratio_right;
+    motor_power.left = motor_revision * ratio_left;
+    motor_power.right = motor_revision * ratio_right;
 
 	//printf("%d,%d\n",motor_power.left,motor_power.right);
 	steering.run(motor_power);

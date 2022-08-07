@@ -8,7 +8,7 @@
 #include "../system/system.h"
 #include "../Steering/Steering.h"
 
-#define PAI         (3.14f)         // 円周率
+#define PI (3.141592653589793f)     // 円周率
 #define LEFT_CURVE  (0)             // 左カーブ
 #define RIGHT_CURVE (1)             // 右カーブ
 
